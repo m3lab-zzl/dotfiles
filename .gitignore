@@ -1,0 +1,6 @@
+.config/github-copilot
+.config/fish/fish_variables
+.cargo/*
+!.cargo/config.toml
+z!
+.config/nvim/dashboard

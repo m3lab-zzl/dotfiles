@@ -1,0 +1,22 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check-fix
+        name: ruff check
+        entry: ruff check
+        language: system
+        types: [python]
+        args: [--fix, --select, I]
+
+      - id: typos-check
+        name: typos check
+        entry: typos
+        language: system
+        types: [python]
+
+      - id: ruff-format
+        name: ruff format
+        entry: ruff format
+        language: system
+        types: [python]
+

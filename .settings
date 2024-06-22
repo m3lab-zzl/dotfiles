@@ -1,0 +1,127 @@
+# $HOME/mamba3/bin set twice on purpose, because mamba activate env will delete one $HOME/mamba3/bin !
+set -x PATH $PATH $HOME/mamba3/bin $HOME/.cargo/bin /Applications # $PATH has to be the first, otherwise nvim always use base python
+
+abbr -a dmh 'python ~/scripts/bot.py'
+abbr -a b 'bpytop'
+abbr -a c 'code'
+abbr -a e '/mnt/c/Windows/explorer.exe'
+abbr -a n "nvim"
+abbr -a v 'vim'
+abbr -a l 'lazygit'
+
+abbr -a ls "exa"
+abbr -a ll 'exa -lbF --git -al' 
+abbr -a llm 'exa -lbGd --git --sort=modified -al' 
+abbr -a t 'exa --tree --level=2'
+
+abbr -a vs "vim ~/.settings"
+abbr -a ns "nvim ~/.settings"
+abbr -a vf 'vim (fzf)'
+abbr -a tf 'tail -f (fzf)'
+
+abbr -a ma 'mamba activate'
+abbr -a mde 'mamba deactivate'
+abbr -a mel 'mamba env list'
+abbr -a mer 'mamba env remove -n'
+abbr -a mic 'mamba install -c conda-forge -C -y'
+abbr -a mrs 'mamba repoquery search'
+
+abbr -a bi 'brew install'
+abbr -a ci 'cargo install'
+abbr -a pi 'pip install -U'
+abbr -a pu 'pip-autoremove'
+abbr -a py 'python -u'
+abbr -a jl 'jupyter lab --no-browser --ip (ip addr | grep eth0 | grep inet | awk \'{print $2}\' | cut -d"/" -f1)'
+abbr -a ipy 'ipython'
+
+abbr -a tn "tmux new-session -s"
+abbr -a ta "tmux attach -t"
+abbr -a tksv "tmux kill-server"
+abbr -a tl "tmux list-sessions"
+abbr -a tkss "tmux kill-sessions -t"
+
+abbr -a gt 'git log --pretty=oneline --abbrev-commit --graph --decorate'
+abbr -a gs "git status"
+abbr -a gm "git merge"
+abbr -a gl "git pull"
+abbr -a gp "git push"
+abbr -a gpab "git push origin --all" # push all branches to origin
+abbr -a gpat "git push origin --tags" # push all tags to origin
+abbr -a gsw "git switch"
+abbr -a gco "git checkout"
+abbr -a gcm "git commit -m"
+abbr -a gaa "git add --all"
+abbr -a gcl "git clone --recurse-submodules"
+abbr -a gdc "git diff --cached --word-diff"
+abbr -a gds "git diff --staged"
+abbr -a grbc "git rebase --continue"
+abbr -a grba "git rebase --abort"
+abbr -a gru "git remote updaate"
+abbr -a grp "git fetch --prune"
+
+abbr -a vgi 'vim .gitignore'
+abbr -a vgc 'vim .git/config'
+
+abbr -a pub2pypi "twine upload --repository pypi dist/*"
+abbr -a pub2testpypi "twine upload --repository testpypi dist/*"
+
+abbr -a sq 'squeue --format="%.18i %.9P %.20j %.8u %.1T %.9M %.10l %.1D %R" --me'
+abbr -a sb 'sbatch'
+abbr -a d2u_all "find . -type f -print0 | xargs -0 dos2unix --"
+
+abbr -a rp "ruplacer --go "
+abbr -a gx 'mamba update --all -y & tldr --update &'
+
+# pip install blind_watermark
+function awm
+    echo "awm: input int password"
+    # ls all png files in current folder, mv them to *_orignial.png
+    # then embed blind watermark and set output png to *.png
+    # finally add text watermark and output to *_wm.png
+    for file in *.png
+      mv $file (basename $file .png)_original.png
+      blind_watermark --embed --pwd $argv[1] (basename $file .png)_original.png "XBUGS" $file
+      echo "added blind watermark to $file"
+      magick -size 140x80 xc:none -fill grey -gravity NorthWest -draw "text 10,10 XBUGS" -gravity SouthEast -draw "text 5,15 XBUGS"  miff:- | composite -tile - $file (basename $file .png)_wm.png
+      echo "added text watermark to $file"
+    end
+end
+
+abbr -a jle 'jless'
+# ph = h5dump file.h5 | less
+function hc
+    echo "preview hdf5 file content: h5dump $argv[1] | less"
+    h5dump $argv[1] | less
+end
+abbr -a ht 'h5glance' # preview h5 tree
+
+# compress file/folder to tar.xz
+function ys
+    echo "XZ_OPT='-T0 -9 -vv' tar cJf $argv[1].tar.xz $argv[1]" 
+    set -x XZ_OPT '-T0 -9 -vv'
+    tar cJf $argv[1].tar.xz $argv[1]
+end
+
+# create conda env and activate it
+function cn
+    set env_name $argv[1]
+    set --erase argv[1]
+    echo "mamba create -n $env_name $argv -y -c conda-forge -C" 
+    mamba create -n $env_name -y -c conda-forge -C $argv
+    echo "mamba activate $env_name"
+    mamba activate $env_name
+end
+
+# wsl2 proxy
+function activate_proxy
+    set -gx hostip (cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
+    set -gx https_proxy "http://$hostip:10809"
+    set -gx http_proxy "http://$hostip:10809"
+    echo "Proxy activated with IP: $hostip"
+end
+
+function deactivate_proxy
+    set -e https_proxy
+    set -e http_proxy
+    echo "Proxy deactivated"
+end
