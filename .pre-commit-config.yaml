@@ -7,7 +7,7 @@ repos:
         entry: ruff check
         language: system
         types: [python]
-        args: [--fix, --select, I]
+        args: [--fix, --select, I, F401, F841]
 
       - id: typos-check
         name: typos check

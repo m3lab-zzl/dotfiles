@@ -30,7 +30,9 @@ if __name__ == "__main__":
             run(f"sh Miniforge3-Darwin-arm64.sh -b -p {HOME}/mamba3")
         else:
             raise NotImplementedError(f"Unknown OS, {ost}")
-        run(f"{HOME}/mamba3/bin/mamba run -p {HOME}/mamba3 --no-capture-output python3 update_tools.py all")
+        run(
+            f"{HOME}/mamba3/bin/mamba run -p {HOME}/mamba3 --no-capture-output python3 update_tools.py all"
+        )
 
     run('git config --global user.name "$(whoami)"')
     run('git config --global user.email "$(whoami)@$(hostname)"')
