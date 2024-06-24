@@ -4,3 +4,4 @@
 !.cargo/config.toml
 z!
 .config/nvim/dashboard
+.ssh
