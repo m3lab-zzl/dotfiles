@@ -10,12 +10,19 @@ args = sys.argv
 if args[1].startswith("m"):
     update_mamba = True
     update_cargo = False
+    update_pip = False
 elif args[1].startswith("c"):
     update_mamba = False
     update_cargo = True
+    update_pip = False
+elif args[1].startswith("p"):
+    update_mamba = False
+    update_cargo = False
+    update_pip = True
 else:
     update_mamba = True
     update_cargo = True
+    update_pip = True
 
 
 def run(cmd: str):
@@ -92,3 +99,16 @@ if update_cargo:
     if to_ins != []:
         run(f"cargo install {' '.join(to_ins)}")
     run("cargo install --git https://github.com/asciinema/agg")
+
+if update_pip:
+    bin_package = {
+        "pyproject-fmt": "pyproject-fmt",  # improved ps
+        "blind_watermark": "blind-watermark",
+    }
+    to_ins = []
+    for b, p in bin_package.items():
+        if not which(b):
+            to_ins.append(p)
+
+    if to_ins != []:
+        run(f"pip install {' '.join(to_ins)}")
