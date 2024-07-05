@@ -14,6 +14,7 @@ abbr -a ll 'exa -lbF --git -al'
 abbr -a llm 'exa -lbGd --git --sort=modified -al' 
 abbr -a t 'exa --tree --level=2'
 
+abbr -a cl 'clear'
 abbr -a vs "vim ~/.settings"
 abbr -a ns "nvim ~/.settings"
 abbr -a vf 'vim (fzf)'
