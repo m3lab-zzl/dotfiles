@@ -278,4 +278,32 @@ tldr cargo
     cargo build --jobs number_of_threads
 ```
 
-...
+- [ruff](https://github.com/astral-sh/ruff)
+
+静态检查工具，代码质量排查与自动格式化，有了它就可以扔掉以前的那套工具链了，包括 flake8, black, isort, pydocstyle, pyupgrade, autoflake 等，而且速度超级快！
+
+![ruff](demos/ruff.svg)
+
+- [fish](https://github.com/fish-shell/fish-shell)
+
+一个更加用户友好的shell，语法相比于bash或zsh略有不同，迁移时请慎重
+
+![fish](demos/fish-shell.png)
+
+- [starship](https://github.com/starship/starship)
+
+命令行提示符主题，让单调的 shell 漂亮一点，不光是花哨，确实会显示很多有用的信息，比如git状态和常见工具版本号等，和 power10k 类似，但是响应更快
+
+![starship](demos/starship.gif)
+
+- [h5glance](https://github.com/European-XFEL/h5glance)
+
+预览hdf5文件树，当报错某个数据不存在时用这个排查很方便
+
+```sh
+$ h5glance sample.h5
+sample.h5
+└path
+  └inside
+    └file   [float64: 100 × 100]
+```
