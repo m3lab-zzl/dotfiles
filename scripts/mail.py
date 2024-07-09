@@ -8,11 +8,15 @@ from email.mime.text import MIMEText
 this_dir = os.path.dirname(os.path.abspath(__file__))
 
 ap = ArgumentParser("mail yourself")
+ap.add_argument("-p", "--password", help="password")
 ap.add_argument("-t", "--title", help="title")
 ap.add_argument("-c", "--content", help="content")
 args = ap.parse_args()
 
-passwd = getpass.getpass("password:")
+if args.password:
+    passwd = args.password
+else:
+    passwd = getpass.getpass("password:")
 
 
 def send_email(subject, message, from_addr, to_addr, smtp_server, port, password):
