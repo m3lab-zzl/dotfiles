@@ -41,7 +41,7 @@ abbr -a tksv "tmux kill-server"
 abbr -a tl "tmux list-sessions"
 abbr -a tkss "tmux kill-sessions -t"
 
-abbr -a gt 'git log --pretty=oneline --abbrev-commit --graph --decorate'
+abbr -a gt 'git log --oneline --abbrev-commit --graph --decorate --all'
 abbr -a gs "git status"
 abbr -a gm "git merge"
 abbr -a gl "git pull"
