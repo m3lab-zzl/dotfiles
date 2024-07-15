@@ -19,6 +19,8 @@ abbr -a vs "vim ~/.settings"
 abbr -a ns "nvim ~/.settings"
 abbr -a vf 'vim (fzf)'
 abbr -a tf 'tail -f (fzf)'
+set FZF_CTRL_T_OPTS "--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+set FZF_CTRL_R_OPTS "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
 
 abbr -a ma 'mamba activate'
 abbr -a mde 'mamba deactivate'

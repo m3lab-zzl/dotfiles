@@ -66,4 +66,3 @@
   "venv-selector.nvim": { "branch": "regexp", "commit": "d946b1e86212f38ff9c42e3b622a8178bbc93461" },
   "vim-visual-multi": { "branch": "master", "commit": "b84a6d42c1c10678928b0bf8327f378c8bc8af5a" },
   "which-key.nvim": { "branch": "main", "commit": "0099511294f16b81c696004fa6a403b0ae61f7a0" }
-}
