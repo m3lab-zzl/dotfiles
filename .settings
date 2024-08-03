@@ -1,5 +1,9 @@
 # $HOME/mamba3/bin set twice on purpose, because mamba activate env will delete one $HOME/mamba3/bin !
 set -x PATH $PATH $HOME/mamba3/bin $HOME/.cargo/bin /Applications # $PATH has to be the first, otherwise nvim always use base python
+set -gx HOMEBREW_PREFIX "/opt/homebrew";
+set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
+set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
+fish_add_path -gP "/opt/homebrew/bin" "/opt/homebrew/sbin"
 
 abbr -a dmh 'python ~/scripts/bot.py'
 abbr -a b 'bpytop'
