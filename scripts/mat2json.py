@@ -4,6 +4,9 @@ import os
 import sys
 
 import numpy as np
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import FuzzyWordCompleter, PathCompleter
+from prompt_toolkit.shortcuts import ProgressBar
 from pymatreader import read_mat
 from scipy.sparse import csc_matrix
 
@@ -31,14 +34,15 @@ def clean_dict(mat: dict):
     - np.ndarray and scipy.sparse.csc_matrix should be converted to list so that it can be saved as json/yaml
     """
     new_dict = {}
-    for key, value in mat.items():
-        if key.startswith("__"):
-            continue
-        if isinstance(value, dict):
-            value = clean_dict(value)
-        else:
-            value = clean_value(value)
-        new_dict[key] = value
+    with ProgressBar() as pb:
+        for key, value in pb(mat.items()):
+            if key.startswith("__"):
+                continue
+            if isinstance(value, dict):
+                value = clean_dict(value)
+            else:
+                value = clean_value(value)
+            new_dict[key] = value
 
     return new_dict
 
@@ -54,10 +58,14 @@ def mat2json(matfile: str, jsonfile: str):
 
 if __name__ == "__main__":
     matfile = os.path.abspath(
-        os.path.expanduser(input("matfile path (/foldername/filename.mat): "))
+        os.path.expanduser(
+            prompt(
+                "matfile path (/foldername/filename.mat): ", completer=PathCompleter()
+            )
+        )
     )
-    yn = input("write array values or just show its shape? (y/n): ")
-    if yn == "y":
+    yn = prompt("hide array values and only show its shape? (y/n): ")
+    if yn == "n":
         verbose = True
     else:
         verbose = False
