@@ -6,15 +6,15 @@ return {
       return {}
     end,
   },
-  {
-    "hrsh7th/nvim-cmp",
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.mapping = cmp.mapping.preset.insert({
-        -- Press Tab to autocomplete
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-      })
-    end,
-  },
+  -- {
+  -- "hrsh7th/nvim-cmp",
+  -- @param opts cmp.ConfigSchema
+  -- opts = function(_, opts)
+  --   local cmp = require("cmp")
+  -- opts.mapping = cmp.mapping.preset.insert({
+  --   -- Press Tab to autocomplete
+  --   ["enter"] = cmp.mapping.confirm({ select = false }),
+  -- })
+  --   end,
+  -- },
 }

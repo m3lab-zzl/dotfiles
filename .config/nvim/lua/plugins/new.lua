@@ -46,6 +46,11 @@ return {
   },
 
   {
+    "benfowler/telescope-luasnip.nvim",
+    module = "telescope._extensions.luasnip",
+  },
+
+  {
     "FabijanZulj/blame.nvim",
     config = function()
       require("blame").setup()
