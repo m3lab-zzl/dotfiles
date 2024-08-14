@@ -1,4 +1,5 @@
 require("mylua.clipboard")
+require("mylua.launchAlacrittyHere")
 
 -- quickly launch apps
 -- option + shift + L: Logseq
