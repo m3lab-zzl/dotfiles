@@ -1,11 +1,17 @@
 # mamba install ffmpeg -c conda-forge
 import os
 
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import FuzzyCompleter
+from prompt_toolkit.completion.filesystem import PathCompleter
+
+completer = FuzzyCompleter(PathCompleter())  # list completion
+
 
 # check if ffmpeg is ready to use in command line, quiet mode
 def must_be_file(hint):
     while True:
-        user_input = input(hint).strip()
+        user_input: str = prompt(hint, completer=completer).strip()
         if os.path.isfile(user_input):
             return user_input
         else:

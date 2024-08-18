@@ -1,3 +1,4 @@
+# --- handle paths --- #
 # $HOME/mamba3/bin set twice on purpose, because mamba activate env will delete one $HOME/mamba3/bin !
 set -x PATH $PATH $HOME/mamba3/bin $HOME/.cargo/bin /Applications # $PATH has to be the first, otherwise nvim always use base python
 set -gx HOMEBREW_PREFIX "/opt/homebrew";
@@ -5,6 +6,7 @@ set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
 set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
 fish_add_path -gP "/opt/homebrew/bin" "/opt/homebrew/sbin"
 
+# --- abbreviations --- #
 abbr -a dmh 'python ~/scripts/bot.py'
 abbr -a b 'bpytop'
 abbr -a c 'code'
@@ -12,27 +14,22 @@ abbr -a e '/mnt/c/Windows/explorer.exe'
 abbr -a n "nvim"
 abbr -a v 'vim'
 abbr -a l 'lazygit'
-
 abbr -a ls "exa"
 abbr -a ll 'exa -lbF --git -al' 
 abbr -a llm 'exa -lbGd --git --sort=modified -al' 
 abbr -a t 'exa --tree --level=2'
-
 abbr -a cl 'clear'
 abbr -a vs "vim ~/.settings"
 abbr -a ns "nvim ~/.settings"
 abbr -a vf 'vim (fzf)'
 abbr -a tf 'tail -f (fzf)'
-set FZF_CTRL_T_OPTS "--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-set FZF_CTRL_R_OPTS "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
-
+abbr -a fb 'fzf --preview="bat --color=always {}"'
 abbr -a ma 'mamba activate'
 abbr -a mde 'mamba deactivate'
 abbr -a mel 'mamba env list'
 abbr -a mer 'mamba env remove -n'
 abbr -a mic 'mamba install -c conda-forge -C -y'
 abbr -a mrs 'mamba repoquery search'
-
 abbr -a bi 'brew install'
 abbr -a ci 'cargo install'
 abbr -a pi 'pip install -U'
@@ -40,13 +37,11 @@ abbr -a pu 'pip-autoremove'
 abbr -a py 'python -u'
 abbr -a jl 'jupyter lab --no-browser --ip (ip addr | grep eth0 | grep inet | awk \'{print $2}\' | cut -d"/" -f1)'
 abbr -a ipy 'ipython'
-
 abbr -a tn "tmux new-session -s"
 abbr -a ta "tmux attach -t"
 abbr -a tksv "tmux kill-server"
 abbr -a tl "tmux list-sessions"
 abbr -a tkss "tmux kill-sessions -t"
-
 abbr -a gt 'git log --oneline --abbrev-commit --graph --decorate --all'
 abbr -a gs "git status"
 abbr -a gm "git merge"
@@ -65,19 +60,16 @@ abbr -a grbc "git rebase --continue"
 abbr -a grba "git rebase --abort"
 abbr -a gru "git remote updaate"
 abbr -a grp "git fetch --prune"
-
 abbr -a vgi 'vim .gitignore'
 abbr -a vgc 'vim .git/config'
-
 abbr -a pub2pypi "twine upload --repository pypi dist/*"
 abbr -a pub2testpypi "twine upload --repository testpypi dist/*"
-
 abbr -a sq 'squeue --format="%.18i %.9P %.20j %.8u %.1T %.9M %.10l %.1D %R" --me'
 abbr -a sb 'sbatch'
 abbr -a d2u_all "find . -type f -print0 | xargs -0 dos2unix --"
-
 abbr -a rp "ruplacer --go "
 abbr -a gx 'mamba update --all -y & tldr --update &'
+abbr -a jle 'jless'
 
 # pip install blind_watermark
 function awm
@@ -99,7 +91,6 @@ function awm
     end
 end
 
-abbr -a jle 'jless'
 # ph = h5dump file.h5 | less
 function hc
     echo "preview hdf5 file content: h5dump $argv[1] | less"
@@ -131,9 +122,13 @@ function activate_proxy
     set -gx http_proxy "http://$hostip:10809"
     echo "Proxy activated with IP: $hostip"
 end
-
 function deactivate_proxy
     set -e https_proxy
     set -e http_proxy
     echo "Proxy deactivated"
 end
+
+# --- keybindings --- #
+set FZF_CTRL_T_OPTS "--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+set FZF_CTRL_R_OPTS "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+set -g fish_key_bindings fish_vi_key_bindings
