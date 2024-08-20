@@ -12,7 +12,8 @@ end
 require("lspconfig").lua_ls.setup({
   settings = {
     Lua = {
-      diagnostics = { globals = { "hs", "ls", "spoon" } },
+      diagnostics = {
+        globals = { "hs", "ls", "spoon" },
       },
     },
   },
