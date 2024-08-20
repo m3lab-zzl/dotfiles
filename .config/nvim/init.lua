@@ -8,3 +8,12 @@ if vim.g.vscode then
 else
   vim.cmd.colorscheme("bamboo")
 end
+
+require("lspconfig").lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "hs", "ls", "spoon" } },
+      },
+    },
+  },
+})

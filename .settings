@@ -70,6 +70,7 @@ abbr -a d2u_all "find . -type f -print0 | xargs -0 dos2unix --"
 abbr -a rp "ruplacer --go "
 abbr -a gx 'mamba update --all -y & tldr --update &'
 abbr -a jle 'jless'
+abbr -a nhs 'nvim ~/.hammerspoon/init.lua'
 
 # pip install blind_watermark
 function awm
