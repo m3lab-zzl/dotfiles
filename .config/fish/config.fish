@@ -22,7 +22,7 @@ end
 set -x CONDA_AUTO_ACTIVATE_BASE false
 
 source $HOME/.settings
-
+# pixi completion --shell fish | source
 # Add this to the end of your config file
 starship init fish | source
 zoxide init fish --cmd j | source

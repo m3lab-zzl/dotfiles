@@ -21,7 +21,6 @@ return {
         header = vim.split(logo, "\n"),
       },
     }
-
     return opts
   end,
 }

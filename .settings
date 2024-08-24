@@ -71,6 +71,7 @@ abbr -a rp "ruplacer --go "
 abbr -a gx 'mamba update --all -y & tldr --update &'
 abbr -a jle 'jless'
 abbr -a nhs 'nvim ~/.hammerspoon/init.lua'
+abbr -a da 'django-admin'
 
 # pip install blind_watermark
 function awm
