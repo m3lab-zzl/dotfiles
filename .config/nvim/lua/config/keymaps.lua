@@ -5,7 +5,7 @@
 
 vim.api.nvim_set_keymap(
   "n",
-  "<leader>mfh",
+  "<leader>hf",
   ":let b:fortran_fixed_source=0<CR>:set syntax=fortran<CR>",
   { noremap = true, desc = "Fortran highlighting (free source)" }
 )
@@ -15,6 +15,8 @@ vim.api.nvim_set_keymap("n", "<C-j>", "Jx", { noremap = true, desc = "Connect tw
 vim.api.nvim_set_keymap("n", "<space>vp", ":set paste!<CR>", { noremap = true, desc = "Toggle set paste" })
 vim.api.nvim_set_keymap("n", "<leader>te", "ddGp", { noremap = true, desc = "Send current line to end" })
 vim.api.nvim_set_keymap("n", "<leader>tb", "ddggP", { noremap = true, desc = "Send current line to begin" })
+vim.api.nvim_set_keymap("n", "<leader>ch", "<cmd>checkhealth<CR>", { noremap = true, desc = "Check health" })
+
 vim.api.nvim_set_keymap("v", "te", "dGp", { noremap = true, desc = "Send to end" })
 vim.api.nvim_set_keymap("v", "tb", "dggP", { noremap = true, desc = "Send to begin" })
 

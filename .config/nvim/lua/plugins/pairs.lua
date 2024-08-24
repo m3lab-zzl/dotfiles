@@ -1,5 +1,4 @@
 -- tweak default plugin settings
-
 return {
   "echasnovski/mini.pairs",
   opts = {
