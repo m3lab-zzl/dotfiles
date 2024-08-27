@@ -20,7 +20,7 @@ end
 # <<< conda initialize <<<
 
 set -x CONDA_AUTO_ACTIVATE_BASE false
-
+set -g fish_color_autosuggestion white
 source $HOME/.settings
 # pixi completion --shell fish | source
 # Add this to the end of your config file
